@@ -1,0 +1,32 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.rafiullah.keygen'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'com.rafiullah.voicetriggerkeygen'
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+    signingConfigs {
+        fixed {
+            storeFile file('../release-fixed.keystore')
+            storePassword 'vtrpass123'
+            keyAlias 'vtr'
+            keyPassword 'vtrpass123'
+        }
+    }
+    buildTypes {
+        debug   { signingConfig signingConfigs.fixed }
+        release { signingConfig signingConfigs.fixed; minifyEnabled false }
+    }
+    sourceSets {
+        main { java.srcDirs = ['src/main/java', '../common/src/main/java'] }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
